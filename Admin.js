@@ -30,6 +30,7 @@ export default class adminpage extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+      <View style={styles.innerContainer}>
         <Text style={styles.header}>Admin</Text>
         <TouchableOpacity
           style={styles.button}
@@ -49,6 +50,7 @@ export default class adminpage extends React.Component {
           <Text style={styles.btntext}>Money Pull Requests</Text>
         </TouchableOpacity>
       </View>
+      </View>
     );
   }
 }
@@ -58,29 +60,45 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#36485f',
-    paddingLeft: 60,
-    paddingRight: 60,
+    alignItems: 'stretch',
+    backgroundColor: '#ededed',
+    paddingLeft: 20,
+    paddingRight: 20,
+  },
+  innerContainer: {
+    elevation:1,
+    backgroundColor:'white',
+    alignItems:'center',
+    padding:15,
+    borderRadius:10
   },
   button: {
     alignSelf: 'stretch',
     alignItems: 'center',
-    padding: 20,
+    padding: 10,
     backgroundColor: '#59cbbd',
     marginTop: 30,
+    marginBottom:20,
+    borderRadius: 5,
   },
   btntext: {
     color: '#fff',
     fontWeight: 'bold',
+    fontSize:20,
   },
   header: {
-    fontSize: 24,
-    color: '#fff',
+    fontSize: 32,
+    // color: '#fff',
     paddingBottom: 10,
     marginBottom: 40,
-    borderBottomColor: '#199187',
+    borderBottomColor: '#012F6F',
     borderBottomWidth: 1,
   },
-
+  textinput: {
+    alignSelf: 'stretch',
+    height: 40,
+    marginBottom: 30,
+    borderBottomColor: '#012F6F',
+    borderBottomWidth: 1,
+  },
 });

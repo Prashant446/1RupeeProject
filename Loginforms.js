@@ -6,6 +6,7 @@ import {
   Text,
   TextInput,
   View,
+  AsyncStorage,
   TouchableOpacity,
 } from 'react-native';
 import {
@@ -20,17 +21,13 @@ import viewmoneyrequestpage from './Viewmoney'
 import viewprojectrequestpage from './Viewproject'
 import signupform from './App'
 import options from './opti'
-// import {
-//   Header,
-// } from 'react-component';
-// import 
-//   HHeader
-//  rom './HHeader.js'
+import {styles} from './styles';
 export default class loginform extends React.Component {
   constructor(props) {
     super(props);
     this.state = { password: '', email: '' };
   }
+
   async checkUser(data) {
     try {
       let response = await fetch('http://ec2-3-14-86-69.us-east-2.compute.amazonaws.com/login', {
@@ -52,6 +49,7 @@ export default class loginform extends React.Component {
     return (
     
       <View style={styles.container}>
+      <View style={styles.innerContainer}>
         <Text style={styles.header}>Login</Text>
         <TextInput
           style={styles.textinput}
@@ -73,20 +71,14 @@ export default class loginform extends React.Component {
             try {
               let isadmin = await this.checkUser(this.state);
               if (isadmin.val == 'admin') {
-            this.props.navigation.dispatch(StackActions.reset({
-              index: 0,
-              actions: [
-                NavigationActions.navigate({ routeName: 'admin' })
-              ],
-            }))
+                this.props.navigation.navigate('admin');                
               } else if (isadmin.val == 'user') {
-            this.props.navigation.dispatch(StackActions.reset({
-              index: 0,
-              actions: [
-                NavigationActions.navigate({ routeName: 'option' })
-               ],
-            }))
-          
+                let user = {
+                  mail: this.state.email,
+                };
+                AsyncStorage.setItem('userMail', JSON.stringify(user), () => {
+                    this.props.navigation.navigate('option');
+                });   
               } else if (isadmin.val == 'nouser') {
                 alert('Login failed');
                 this.props.navigation.navigate('login');
@@ -98,55 +90,14 @@ export default class loginform extends React.Component {
           <Text style={styles.btntext}>Login</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={styles.button}
+          // style={styles}
           onPress={() => {
             this.props.navigation.navigate('signup');
           }}>
-          <Text style={styles.btntext}>Sign Up</Text>
+          <Text style={{color:'#012F6F',}}>Sign Up</Text>
         </TouchableOpacity>
       </View>
-      // </View>
+      </View>
     );
   }
 }
-
-
-
-
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#36485f',
-    paddingLeft: 60,
-    paddingRight: 60,
-  },
-  button: {
-    alignSelf: 'stretch',
-    alignItems: 'center',
-    padding: 20,
-    backgroundColor: '#59cbbd',
-    marginTop: 30,
-  },
-  btntext: {
-    color: '#fff',
-    fontWeight: 'bold',
-  },
-  header: {
-    fontSize: 24,
-    color: '#fff',
-    paddingBottom: 10,
-    marginBottom: 40,
-    borderBottomColor: '#199187',
-    borderBottomWidth: 1,
-  },
-  textinput: {
-    alignSelf: 'stretch',
-    height: 40,
-    marginBottom: 30,
-    borderBottomColor: '#f8f8f8',
-    borderBottomWidth: 1,
-  },
-});

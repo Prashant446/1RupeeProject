@@ -8,6 +8,7 @@ import {
   Text,
   TextInput,
   View,
+  AsyncStorage,
   TouchableOpacity,
 } from 'react-native';
 import {
@@ -16,6 +17,7 @@ import {
   StackActions,
   NavigationActions,
 } from 'react-navigation';
+import {styles} from './styles';
 // import {
 //   Header,
 // } from 'react-component';
@@ -31,6 +33,7 @@ import donation from './Donation'
 import {bank,project} from './newprojectfordonation'
 import paytm from './paytm.js'
 import decker from './decker'
+import owndecker from './owndecker'
 type Props = {};
 
 
@@ -59,6 +62,7 @@ export  class signupform extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+      <View style={styles.innerContainer}>
         <Text style={styles.header}>Sign Up</Text>
 
         <TextInput
@@ -100,47 +104,11 @@ export  class signupform extends React.Component {
           }}>
           <Text style={styles.btntext}>Sign Up</Text>
         </TouchableOpacity>
+        </View>
       </View>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#36485f',
-    paddingLeft: 60,
-    paddingRight: 60,
-  },
-  button: {
-    alignSelf: 'stretch',
-    alignItems: 'center',
-    padding: 20,
-    backgroundColor: '#59cbbd',
-    marginTop: 30,
-  },
-  btntext: {
-    color: '#fff',
-    fontWeight: 'bold',
-  },
-  header: {
-    fontSize: 24,
-    color: '#fff',
-    paddingBottom: 10,
-    marginBottom: 40,
-    borderBottomColor: '#199187',
-    borderBottomWidth: 1,
-  },
-  textinput: {
-    alignSelf: 'stretch',
-    height: 40,
-    marginBottom: 30,
-    borderBottomColor: '#f8f8f8',
-    borderBottomWidth: 1,
-  },
-});
 
 const AppNavigator = createStackNavigator(
   {
@@ -153,34 +121,47 @@ const AppNavigator = createStackNavigator(
     admin: {
       screen: adminpage,
     },
-     viewmoneyrequest: {
+    viewmoneyrequest: {
       screen: viewmoneyrequestpage,
     },
     viewprojectrequest: {
       screen: viewprojectrequestpage,
     },
-     option: {
+    option: {
       screen: options,
     },
-        donate: {
+    donate: {
       screen: donation,
     },
     proj: {
-  screen : project,
+      screen : project,
     },
-     ban: {
-  screen : bank
+    ban: {
+      screen : bank
     },
-        pay: {
-  screen : paytm
+    pay: {
+      screen : paytm
     },
-      deck: {
-  screen : decker
+    deck: {
+      screen : decker
+    },
+    owndeck: {
+      screen : owndecker
     },
   },
 
   {
     initialRouteName: 'login',
+    defaultNavigationOptions: {
+      headerStyle: {
+        backgroundColor: '#001f61',
+        height:10,
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+    },
   }
 );
 export default createAppContainer(AppNavigator);

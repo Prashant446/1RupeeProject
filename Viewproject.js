@@ -75,5 +75,4 @@ const styles = StyleSheet.create({
     borderBottomColor: '#199187',
     borderBottomWidth: 1,
   },
-
 });
