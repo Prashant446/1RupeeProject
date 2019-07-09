@@ -8,6 +8,7 @@ import {
   Text,
   TextInput,
   View,
+  AsyncStorage,
   TouchableOpacity,
 } from 'react-native';
 import {
@@ -23,21 +24,22 @@ import {
 //   HHeader
 //  rom './HHeader.js'
 import adminpage from './Admin'
+import forgetpassword from './forgetpassword'
 import viewmoneyrequestpage from './Viewmoney'
 import viewprojectrequestpage from './Viewproject'
 import loginform from './Loginforms'
 import options from './opti'
 import donation from './Donation'
 import {bank,project} from './newprojectfordonation'
-import paytm from './paytm.js'
-import decker from './decker'
-type Props = {};
+import {Decker,paytm} from './decker'
+import owndecker from './owndecker'
+// type Props = {};
 
 
 export  class signupform extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { phoneno: '', password: '', email: '' };
+    this.state = { phoneno: '', password: '', email: '' ,donatedamount: 0};
   }
   async newUser(data) {
     try {
@@ -175,8 +177,14 @@ const AppNavigator = createStackNavigator(
   screen : paytm
     },
       deck: {
-  screen : decker
+  screen : Decker
     },
+    owndeck: {
+      screen : owndecker
+        },
+    forgetpasswords: {
+      screen : forgetpassword
+        },    
   },
 
   {

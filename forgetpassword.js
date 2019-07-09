@@ -21,15 +21,15 @@ import viewmoneyrequestpage from './Viewmoney'
 import viewprojectrequestpage from './Viewproject'
 import signupform from './App'
 import options from './opti'
-import forgetpassword from './forgetpassword'
-export default class loginform extends React.Component {
+export default class forgetpassword extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { password: '', email: '' };
-  }
-  async checkUser(data) {
+    this.state = { email: '' ,password: ''};
+  
+}
+async checkUser(data) {
     try {
-      let response = await fetch('http://ec2-3-14-86-69.us-east-2.compute.amazonaws.com/login', {
+      let response = await fetch('http://ec2-3-14-86-69.us-east-2.compute.amazonaws.com/forgetpassword', {
         method: 'POST',
         headers: {
           Accept: 'application/json',
@@ -41,6 +41,7 @@ export default class loginform extends React.Component {
       return responseJson;
     } catch (error) {
       console.log(error);
+      return;
     }
   }
 
@@ -48,7 +49,7 @@ export default class loginform extends React.Component {
     return (
     
       <View style={styles.container}>
-        <Text style={styles.header}>Login</Text>
+        <Text style={styles.header}>Get Password</Text>
         <TextInput
           style={styles.textinput}
           placeholder="Your email"
@@ -57,53 +58,26 @@ export default class loginform extends React.Component {
         />
         <TextInput
           style={styles.textinput}
-          placeholder="Your Password"
-          secureTextEntry={true}
+          placeholder="New Password"
           underlineColorAndroid={'transparent'}
           onChangeText={password => this.setState({ password })}
         />
-
         <TouchableOpacity
           style={styles.button}
-          onPress={async () => {
-            try {
-              let isadmin = await this.checkUser(this.state);
-              if (isadmin.val == 'admin') {
-                this.props.navigation.navigate('admin');                
-              } else if (isadmin.val == 'user') {
-                let user = {
-                  mail: this.state.email,
-                };
-                AsyncStorage.setItem('userMail', JSON.stringify(user), () => {
-                    this.props.navigation.navigate('option');
-                });   
-              } else if (isadmin.val == 'nouser') {
-                alert('Login failed');
-                this.props.navigation.navigate('login');
-              }
-            } catch (err) {
-              console.log(err);
-            }
+          onPress={
+            async () => {
+                try{  
+                    let temp = this.checkUser(this.state)
+                    // .then(
+                        // console.log(this.state);
+                      alert("Password has been sent to your registered email address.")
+                      this.props.navigation.navigate('login')
+                    //   ); 
+                } catch (err) {
+                  console.log(err);
+                }
           }}>
-          <Text style={styles.btntext}>Login</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
-            this.props.navigation.navigate('signup');
-          }}>
-          <Text style={styles.btntext}>Sign Up</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
-            // fetch('http://172.17.73.189:8080/forgetpassword')
-            // .then(
-            //   alert("Password has been sent to your registered email address.")
-            // );
-            this.props.navigation.navigate('forgetpasswords');
-          }}>
-          <Text style={styles.btntext}>Forgetpassword</Text>
+          <Text style={styles.btntext}>Confirm</Text>
         </TouchableOpacity>
       </View>
       // </View>

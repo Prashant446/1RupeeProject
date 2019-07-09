@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Platform, StyleSheet,Text,TextInput,View,TouchableOpacity,Button,} from 'react-native';
+import {Platform, StyleSheet,Text,TextInput,View,AsyncStorage,TouchableOpacity,Button,} from 'react-native';
 import {
   createAppContainer,
   createStackNavigator,
@@ -7,7 +7,7 @@ import {
   NavigationActions,
 } from 'react-navigation';
 
-type props={};
+// type props={};
 let global = {
   name:'',
   longdescription: '', 
@@ -68,7 +68,7 @@ export class project extends React.Component {
 export class bank extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { bankno: '', ifsccode: '', education: '',name:global.name ,longdescription:global.longdescription ,shortdescription: global.shortdescription};
+    this.state = { projectbalance: 0 ,requestedbalance: 0 ,accountNo: '', ifscCode: '',email : '', status : 'NO', education: '', projectName:global.name ,longDescription:global.longdescription ,shortDescription: global.shortdescription};
   }
 
 
@@ -90,6 +90,13 @@ export class bank extends React.Component {
   }
 
   render() {
+    userMail = AsyncStorage.getItem('userMail', (err, result) => {
+     
+      let maill = JSON.parse(result);
+      maill = maill.mail;
+      // console.log(maill);
+      this.setState({ email  : maill});
+    });
     return (
       <View style={styles.container}>
         <Text style={styles.header}>SIGN UP</Text>
@@ -97,13 +104,13 @@ export class bank extends React.Component {
           style={styles.textinput}
           placeholder="Your Account No"
           underlineColorAndroid={'transparent'}
-          onChangeText={bankno => this.setState({ bankno })}
+          onChangeText={accountNo => this.setState({ accountNo })}
         />
         <TextInput
           style={styles.textinput}
           placeholder="Your IFSC Code"
           underlineColorAndroid={'transparent'}
-          onChangeText={ifsccode => this.setState({ ifsccode })}
+          onChangeText={ifscCode => this.setState({ ifscCode })}
         />
         <TextInput
           style={styles.textinput}
@@ -170,4 +177,5 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
+
 

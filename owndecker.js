@@ -6,13 +6,7 @@ const SCREEN_HEIGHT = Dimensions.get('window').height
 const SCREEN_WIDTH = Dimensions.get('window').width
 import Icon from 'react-native-vector-icons/Ionicons'
 import { AuthSession } from 'expo';
-// const Users = [
-//   { id: "1", uri: require('./assets/1.jpg') },
-//   { id: "2", uri: require('./assets/2.jpg') },
-//   { id: "3", uri: require('./assets/3.jpg') },
-//   { id: "4", uri: require('./assets/4.jpg') },
-//   { id: "5", uri: require('./assets/5.jpg') },
-// ]
+
 
 export default class Decker extends React.Component {
 
@@ -84,29 +78,32 @@ export default class Decker extends React.Component {
   }
 
   componentWillMount() { 
-    userMail = AsyncStorage.getItem('userMail', (err, result) => {
+    
+userMail = AsyncStorage.getItem('userMail', (err, result) => {
      
-        let maill = JSON.parse(result);
-        maill = maill.mail;
-        // console.log(maill);
-        this.email = maill ;
-      }).then(()=>{
-          fetch('http://172.17.73.189:8080/ownprojects?email='+this.email)
-        .then((response) => response.json())
-        .then((responseJson) => {
-          // console.log(JSON.stringify(responseJson));
-          var arr = Object.keys(responseJson).map((k) => { return {id:k ,...responseJson[k]} });
-          // console.log(arr);
-          this.setState({
-            isLoading: false,
-            dataSource: arr,
-          })
-          this.lastIndex = arr.length - 1;
-         })
-        .catch((error) =>{
-          console.error(error);
-        }); 
-      });
+  let maill = JSON.parse(result);
+  maill = maill.mail;
+  // console.log(maill);
+  this.email = maill ;
+}).then(()=>{
+    // console.log(this.email);
+  //   let url = 'http://172.17.73.189:8080/ownprojects?email='+this.email;
+    fetch('http://ec2-3-14-86-69.us-east-2.compute.amazonaws.com/ownprojects?email='+this.email)
+  .then((response) => response.json())
+  .then((responseJson) => {
+    // console.log(JSON.stringify(responseJson));
+    var arr = Object.keys(responseJson).map((k) => { return {id:k ,...responseJson[k]} });
+    // console.log(arr);
+    this.setState({
+      isLoading: false,
+      dataSource: arr,
+    })
+    this.lastIndex = arr.length - 1;
+   })
+  .catch((error) =>{
+    console.error(error);
+  }); 
+});
       
     this.PanResponder = PanResponder.create({
 
@@ -217,16 +214,29 @@ export default class Decker extends React.Component {
           editable = {true}
           keyboardType = "number-pad"
           style={styles.textInput}
-          onChangeText={(text) => this.setState({amount:text})}/>
-        <TouchableOpacity style={styles.submitButton}>
+          onChangeText={(text) => this.setState({amount:text})}
+          />
+        <TouchableOpacity style={styles.submitButton}
+         onPress={() => {
+          console.log(this.state.dataSource[this.state.currentIndex].refID);
+          fetch('http://ec2-3-14-86-69.us-east-2.compute.amazonaws.com/requestMoney?id='+this.state.dataSource[this.state.currentIndex].refID+"&id2="+this.state.amount)
+          .then(
+            alert("Money Requested Successfully.")
+            )
+          .catch((error) =>{
+            console.error(error);
+          }); 
+        }}
+        >
           <View style={{}}>
             <Text
-              style={{fontSize:15, color:'#efefef'}}>Contribute</Text>
+              style={{fontSize:15, color:'#efefef'}}>Request</Text>
           </View>
         </TouchableOpacity>
       </View>
     )
   }
+
 
   renderUsers = () => {
 
@@ -282,6 +292,8 @@ export default class Decker extends React.Component {
     return (  
       <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : null} style={{ flex: 1 }}>
         <View style={{flex: 1, justifyContent: "flex-end",}}>      
+          <View style={{ backgroundColor:'#002E6E', height:50 }}>
+          </View>
           <View style={{ backgroundColor: '#ededed',flex:1}}>
               {this.renderUsers()}
           </View>
@@ -291,3 +303,4 @@ export default class Decker extends React.Component {
     );
   }
 }
+
