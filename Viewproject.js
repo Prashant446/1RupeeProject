@@ -292,6 +292,3 @@ export default class Decker extends React.Component {
     );
   }
 }
-
-
-

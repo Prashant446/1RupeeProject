@@ -10,31 +10,31 @@ import {
 } from 'react-native';
 import {styles} from './styles';
 
-export default class adminpage extends React.Component {
+export default class donations extends React.Component {
   render() {
     return (
       <View style={styles.container}>
       <View style={styles.innerContainer}>
-        <Text style={styles.header}>Admin</Text>
+        <Text style={styles.header}>Apply for Donation</Text>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => 
-          {
-            this.props.navigation.navigate('viewprojectrequest');
-          }}
+          onPress={() => {
+           this.props.navigation.navigate('deck');
+                }}
         >
-          <Text style={styles.btntext}>Project Upload Requests</Text>
+          <Text style={styles.btntext}>Your Projects</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
-            this.props.navigation.navigate('viewmoneyrequest');
+            this.props.navigation.navigate('proj');
           }}
         >
-          <Text style={styles.btntext}>Money Pull Requests</Text>
+          <Text style={styles.btntext}>Requests for Donation</Text>
         </TouchableOpacity>
       </View>
       </View>
     );
   }
 }
+
