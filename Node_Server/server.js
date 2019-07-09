@@ -72,9 +72,11 @@ app.get("/verifymail",function(req,res){
     
     firebase.database().ref('/Users').child(uid).set(data);
     res.send("Verfication Successful");
+	return;
   }
   else {
     res.send("Verfication Unsuccessful");
+	return;
   }
 });
 app.get("/verifypassword",function(req,res){
@@ -97,12 +99,12 @@ app.get("/verifypassword",function(req,res){
         firebase.database().ref('/Users/'+objKey[i]).update({
           password : data.password
         });
-        snapshot.val()[objKey[i]].password= data.password;
         res.send("Verfication Successful");
         return;
       }
     }
     res.send("Verfication Unsuccessful");
+    return;
 
     });
   }
@@ -216,11 +218,15 @@ app.get("/verifybalance", function(req, res){
       if(objKey[i]==req.query.id){
         let reqmoney =snapshot.val()[objKey[i]].requestedbalance;
    
-        let totalmoney = snapshot.val()[objKey[i]].projectbalance;
-        totalmoney-=reqmoney;
+        let withdrawnmoney = snapshot.val()[objKey[i]].projectwithdrawn;
+        withdrawnmoney = parseInt(withdrawnmoney) + parseInt(reqmoney);
+        let currentmoney = snapshot.val()[objKey[i]].projectbalance;
+        currentmoney = parseInt(currentmoney) - parseInt(withdrawnmoney);
         firebase.database().ref('/Projects/'+req.query.id).update({
-          projectbalance : totalmoney,
-          requestedbalance : 0
+          projectwithdrawn : withdrawnmoney,
+          requestedbalance : 0 ,
+          currentbalance : currentmoney,
+          moneystatus : "Accepted"
         });
       }
     };
@@ -228,6 +234,24 @@ app.get("/verifybalance", function(req, res){
   });
   
 })
+
+app.get("/ignorebalance", function(req, res){
+  var projectsRef = firebase.database().ref('/Projects').orderByChild('timestamp');
+  projectsRef.once('value', (snapshot) => {
+    let objKey = Object.keys(snapshot.val());
+    for(var i =0 ;i < objKey.length; i++ ){
+      if(objKey[i]==req.query.id){
+        firebase.database().ref('/Projects/'+req.query.id).update({
+          requestedbalance : 0 ,
+          moneystatus : 'Denied'
+          });
+      }
+    };
+      res.end();
+  });
+  
+})
+
 
 app.get("/requestMoney", function(req, res){
   // console.log(req.query);
@@ -237,7 +261,9 @@ app.get("/requestMoney", function(req, res){
     for(var i =0 ;i < objKey.length; i++ ){
       if(objKey[i]==req.query.id){
         firebase.database().ref('/Projects/'+req.query.id).update({
-          requestedbalance : req.query.id2
+          requestedbalance : req.query.id2 ,
+          requestedmsg : req.query.id3 ,
+          moneystatus : "Pending"
         });
       }
     };

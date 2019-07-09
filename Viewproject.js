@@ -87,7 +87,7 @@ export default class Decker extends React.Component {
       }).then(()=>{
         //   console.log(this.email);
         //   let url = 'http://172.17.73.189:8080/ownprojects?email='+this.email;
-          fetch('http://ec2-3-14-86-69.us-east-2.compute.amazonaws.com/adminprojects')
+          fetch('http://172.17.73.189:8080/adminprojects')
         .then((response) => response.json())
         .then((responseJson) => {
           // console.log(JSON.stringify(responseJson));
@@ -195,6 +195,12 @@ export default class Decker extends React.Component {
         <TouchableWithoutFeedback>
           <View style={{padding:3}}>
               <Text style={styles.genText}>Short Desc- {item.shortDescription}</Text>
+              <Text style={styles.genText}>Account NO.- {item.accountNo}</Text>
+              <Text style={styles.genText}>IFSC Code- {item.ifscCode}</Text>
+              <Text style={styles.genText}>Education Qualification- {item.education}</Text>
+              {/* <Text style={styles.genText}>Total Amount- {item.projectbalance}</Text>
+              <Text style={styles.genText}>Total Withdrawn Amount- {item.projectwithdrawn}</Text>
+              <Text style={styles.genText}>Requested Amount- {item.requestedbalance}</Text> */}
               <Text style={styles.genText}>Long Desc- {item.longDescription}</Text>
           </View>
         </TouchableWithoutFeedback>
@@ -210,7 +216,7 @@ export default class Decker extends React.Component {
         <TouchableOpacity style={styles.submitButton}
         onPress={() => {
           // console.log(this.state.dataSource[this.state.currentIndex].refID);
-          fetch('http://ec2-3-14-86-69.us-east-2.compute.amazonaws.com/updateprojects?id='+this.state.dataSource[this.state.currentIndex].refID)
+          fetch('http://172.17.73.189:8080/updateprojects?id='+this.state.dataSource[this.state.currentIndex].refID)
           .then(
             alert("Updated Succesfully. Please refresh to see changes.")
             )

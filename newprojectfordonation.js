@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Platform, StyleSheet,Text,TextInput,View,TouchableOpacity,Button,} from 'react-native';
+import {Platform, StyleSheet,Text,TextInput,View,AsyncStorage,TouchableOpacity,Button,} from 'react-native';
 import Constants from 'expo-constants';
 import * as ImagePicker from 'expo-image-picker'
 import * as Permissions from 'expo-permissions';
@@ -105,13 +105,13 @@ export class project extends React.Component {
 export class bank extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { bankno: '', ifsccode: '', education: '',name:global.name , image64:global.image64, longdescription:global.longdescription ,shortdescription: global.shortdescription};
+    this.state = { projectbalance: 0 ,moneystatus : 'Verified' ,requestedbalance: 0 ,requestedmsg: '' ,accountNo: '', ifscCode: '',email : '', status : 'NO', education: '', projectwithdrawn: 0, currentbalance :0, projectName:global.name ,longDescription:global.longdescription ,shortDescription: global.shortdescription};
   }
 
 
   async newUser(data) {
     try {
-      let response = await fetch('http://ec2-3-14-86-69.us-east-2.compute.amazonaws.com/addProject', {
+      let response = await fetch('http://172.17.73.189:8080/addProject', {
         method: 'POST',
         headers: {
           Accept: 'application/json',

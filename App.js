@@ -39,7 +39,7 @@ export  class signupform extends React.Component {
   }
   async newUser(data) {
     try {
-      let response = await fetch('http://ec2-3-14-86-69.us-east-2.compute.amazonaws.com/users', {
+      let response = await fetch('http://172.17.73.189:8080/users', {
         method: 'POST',
         headers: {
           Accept: 'application/json',

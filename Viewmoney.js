@@ -87,7 +87,7 @@ export default class Decker extends React.Component {
       }).then(()=>{
         //   console.log(this.email);
         //   let url = 'http://172.17.73.189:8080/ownprojects?email='+this.email;
-          fetch('http://ec2-3-14-86-69.us-east-2.compute.amazonaws.com/adminprojectsformoney')
+          fetch('http://172.17.73.189:8080/adminprojectsformoney')
         .then((response) => response.json())
         .then((responseJson) => {
           // console.log(JSON.stringify(responseJson));
@@ -195,7 +195,16 @@ export default class Decker extends React.Component {
         <TouchableWithoutFeedback>
           <View style={{padding:3}}>
               <Text style={styles.genText}>Short Desc- {item.shortDescription}</Text>
+              <Text style={styles.genText}>Account NO.- {item.accountNo}</Text>
+              <Text style={styles.genText}>IFSC Code- {item.ifscCode}</Text>
+              <Text style={styles.genText}>Education Qualification- {item.education}</Text>
+              <Text style={styles.genText}>Total Amount- {item.projectbalance}</Text>
+              <Text style={styles.genText}>Total Withdrawn Amount- {item.projectwithdrawn}</Text>
+              <Text style={styles.genText}>Current Amount- {item.currentbalance}</Text>
+              <Text style={styles.genText}>Requested Amount- {item.requestedbalance}</Text>
+              <Text style={styles.genText}>Request Message- {item.requestedmsg}</Text>
               <Text style={styles.genText}>Long Desc- {item.longDescription}</Text>
+              
           </View>
         </TouchableWithoutFeedback>
       </ScrollView>
@@ -210,7 +219,7 @@ export default class Decker extends React.Component {
         <TouchableOpacity style={styles.submitButton}
         onPress={() => {
           // console.log(this.state.dataSource[this.state.currentIndex].refID);
-          fetch('http://ec2-3-14-86-69.us-east-2.compute.amazonaws.com/verifybalance?id='+this.state.dataSource[this.state.currentIndex].refID)
+          fetch('http://172.17.73.189:8080/verifybalance?id='+this.state.dataSource[this.state.currentIndex].refID)
           .then(
             alert("Updated Succesfully. Please refresh to see changes.")
             )
@@ -220,7 +229,24 @@ export default class Decker extends React.Component {
         }}>
           <View style={{}}>
             <Text
-              style={{fontSize:15, color:'#efefef'}}>Verify</Text>
+              style={{fontSize:15, color:'#efefef'}}>Accept</Text>
+          </View>
+        </TouchableOpacity>
+        
+        <TouchableOpacity style={styles.submitButton}
+        onPress={() => {
+          // console.log(this.state.dataSource[this.state.currentIndex].refID);
+          fetch('http://172.17.73.189:8080/ignorebalance?id='+this.state.dataSource[this.state.currentIndex].refID)
+          .then(
+            alert("Updated Succesfully. Please refresh to see changes.")
+            )
+          .catch((error) =>{
+            console.error(error);
+          }); 
+        }}>
+          <View style={{}}>
+            <Text
+              style={{fontSize:15, color:'#efefef'}}>Deny</Text>
           </View>
         </TouchableOpacity>
       </View>

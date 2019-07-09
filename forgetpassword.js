@@ -29,7 +29,7 @@ export default class forgetpassword extends React.Component {
 }
 async checkUser(data) {
     try {
-      let response = await fetch('http://ec2-3-14-86-69.us-east-2.compute.amazonaws.com/forgetpassword', {
+      let response = await fetch('http://172.17.73.189:8080/forgetpassword', {
         method: 'POST',
         headers: {
           Accept: 'application/json',

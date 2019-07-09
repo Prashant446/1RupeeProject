@@ -87,7 +87,7 @@ userMail = AsyncStorage.getItem('userMail', (err, result) => {
 }).then(()=>{
     // console.log(this.email);
   //   let url = 'http://172.17.73.189:8080/ownprojects?email='+this.email;
-    fetch('http://ec2-3-14-86-69.us-east-2.compute.amazonaws.com/ownprojects?email='+this.email)
+    fetch('http://172.17.73.189:8080/ownprojects?email='+this.email)
   .then((response) => response.json())
   .then((responseJson) => {
     // console.log(JSON.stringify(responseJson));
@@ -193,7 +193,15 @@ userMail = AsyncStorage.getItem('userMail', (err, result) => {
       <ScrollView >
         <TouchableWithoutFeedback>
           <View style={{padding:3}}>
-              <Text style={styles.genText}>Short Desc- {item.shortDescription}</Text>
+          <Text style={styles.genText}>Short Desc- {item.shortDescription}</Text>
+              {/* <Text style={styles.genText}>Account NO.- {item.accountNo}</Text>
+              <Text style={styles.genText}>IFSC Code- {item.ifscCode}</Text>
+              <Text style={styles.genText}>Education Qualification- {item.education}</Text> */}
+              <Text style={styles.genText}>Total Amount- {item.projectbalance}</Text>
+              <Text style={styles.genText}>Total Withdrawn Amount- {item.projectwithdrawn}</Text>
+              <Text style={styles.genText}>Current Amount- {item.currentbalance}</Text>
+              <Text style={styles.genText}>Requested Amount- {item.requestedbalance}</Text>
+              <Text style={styles.genText}>Last Money Request- {item.moneystatus}</Text>
               <Text style={styles.genText}>Long Desc- {item.longDescription}</Text>
           </View>
         </TouchableWithoutFeedback>
@@ -205,8 +213,17 @@ userMail = AsyncStorage.getItem('userMail', (err, result) => {
   _renderFooter = () => {
 
     return(
-      <View style={styles.cardFooter}>
-        <TextInput
+      <View style={[styles.cardFooter,{flexDirection:'column'}]}>
+          <TextInput
+          adjustsFontSizeToFit={true}
+          numberOfLines={1}
+          placeholder="Enter Withdrawl Message"
+          editable = {true}
+          style={styles.textInput}
+          onChangeText={(text) => this.setState({msg:text})}
+          />
+      <View style={styles.cardFooter}>          
+          <TextInput
           adjustsFontSizeToFit={true}
           numberOfLines={1}
           placeholder="Enter Amount"
@@ -218,7 +235,7 @@ userMail = AsyncStorage.getItem('userMail', (err, result) => {
         <TouchableOpacity style={styles.submitButton}
          onPress={() => {
           console.log(this.state.dataSource[this.state.currentIndex].refID);
-          fetch('http://ec2-3-14-86-69.us-east-2.compute.amazonaws.com/requestMoney?id='+this.state.dataSource[this.state.currentIndex].refID+"&id2="+this.state.amount)
+          fetch('http://172.17.73.189:8080/requestMoney?id='+this.state.dataSource[this.state.currentIndex].refID+"&id2="+this.state.amount+"&id3="+this.state.msg)
           .then(
             alert("Money Requested Successfully.")
             )
@@ -227,11 +244,14 @@ userMail = AsyncStorage.getItem('userMail', (err, result) => {
           }); 
         }}
         >
+
           <View style={{}}>
             <Text
               style={{fontSize:15, color:'#efefef'}}>Request</Text>
           </View>
         </TouchableOpacity>
+        
+        </View>    
       </View>
     )
   }
