@@ -87,7 +87,7 @@ export default class Decker extends React.Component {
       }).then(()=>{
         //   console.log(this.email);
         //   let url = 'http://172.17.73.189:8080/ownprojects?email='+this.email;
-          fetch('http://172.17.73.189:8080/adminprojectsformoney')
+          fetch('http://ec2-3-14-86-69.us-east-2.compute.amazonaws.com/adminprojectsformoney')
         .then((response) => response.json())
         .then((responseJson) => {
           // console.log(JSON.stringify(responseJson));
@@ -210,7 +210,7 @@ export default class Decker extends React.Component {
         <TouchableOpacity style={styles.submitButton}
         onPress={() => {
           // console.log(this.state.dataSource[this.state.currentIndex].refID);
-          fetch('http://172.17.73.189:8080/verifybalance?id='+this.state.dataSource[this.state.currentIndex].refID)
+          fetch('http://ec2-3-14-86-69.us-east-2.compute.amazonaws.com/verifybalance?id='+this.state.dataSource[this.state.currentIndex].refID)
           .then(
             alert("Updated Succesfully. Please refresh to see changes.")
             )

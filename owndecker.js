@@ -7,7 +7,6 @@ const SCREEN_WIDTH = Dimensions.get('window').width
 import Icon from 'react-native-vector-icons/Ionicons'
 import { AuthSession } from 'expo';
 
-
 export default class Decker extends React.Component {
 
   constructor() {

@@ -107,7 +107,7 @@ export class Decker extends React.Component {
       // console.log(maill);
       global.email = maill ;
     })
-    fetch('http://172.17.73.189:8080/projects')
+    fetch('http://ec2-3-14-86-69.us-east-2.compute.amazonaws.com/projects')
       .then((response) => response.json())
       .then((responseJson) => {
         // console.log(JSON.stringify(responseJson));

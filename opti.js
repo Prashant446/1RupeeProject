@@ -1,15 +1,7 @@
 import React, { Component } from 'react';
 import {Platform, StyleSheet,Text,TextInput,AsyncStorage,View,TouchableOpacity,Button,} from 'react-native';
-import {
-  createAppContainer,
-  createStackNavigator,
-  StackActions,
-  NavigationActions,
-} from 'react-navigation';
-import donation from './Donation'
-import decker from './decker'
-import owndecker from './owndecker'
-// import console = require('console');
+
+import {styles} from './styles';
 
 export default class options extends React.Component {
   constructor(props) {
@@ -32,6 +24,7 @@ export default class options extends React.Component {
  });
     return (
       <View style={styles.container}>
+      <View style={styles.innerContainer}>
         {/* {console.log(this.state.email)}  */}
         <Text style={styles.header}>Donate or Apply </Text>
 
@@ -48,7 +41,7 @@ export default class options extends React.Component {
            this.props.navigation.navigate('owndeck');
                 }}
         >
-          <Text style={styles.btntext}>Your Project</Text>
+          <Text style={styles.btntext}>Your Projects</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.button}
@@ -56,38 +49,10 @@ export default class options extends React.Component {
             this.props.navigation.navigate('proj');
           }}
         >
-          <Text style={styles.btntext}>Requests for Donation</Text>
+          <Text style={styles.btntext}>Request for Donations</Text>
         </TouchableOpacity>
+      </View>
       </View>
     );
   }
 }
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#36485f',
-    paddingLeft: 60,
-    paddingRight: 60,
-  },
-  header: {
-    fontSize: 24,
-    color: '#fff',
-    paddingBottom: 10,
-    marginBottom: 40,
-    borderBottomColor: '#199187',
-    borderBottomWidth: 1,
-  },
-  button: {
-    alignSelf: 'stretch',
-    alignItems: 'center',
-    padding: 20,
-    backgroundColor: '#59cbbd',
-    marginTop: 30,
-  },
-  btntext: {
-    color: '#fff',
-    fontWeight: 'bold',
-  },
-});
