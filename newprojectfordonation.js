@@ -105,7 +105,7 @@ export class project extends React.Component {
 export class bank extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { projectbalance: 0 ,moneystatus : 'Verified' ,requestedbalance: 0 ,requestedmsg: '' ,accountNo: '', ifscCode: '',email : '', status : 'NO', education: '', projectwithdrawn: 0, currentbalance :0, projectName:global.name ,longDescription:global.longdescription ,shortDescription: global.shortdescription};
+    this.state = { projectbalance: 0 ,moneystatus : 'No requests so far' ,requestedbalance: 0 ,projectstatus: "Pending",requestedmsg: '' ,accountNo: '', ifscCode: '',email : '', status : 'NO', education: '', projectwithdrawn: 0, currentbalance :0, projectName:global.name ,longDescription:global.longdescription ,shortDescription: global.shortdescription};
   }
 
 

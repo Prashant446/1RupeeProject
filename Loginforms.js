@@ -79,11 +79,11 @@ export default class loginform extends React.Component {
           <Text style={styles.btntext}>Login</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          // style={styles}
-          onPress={() => {
+          style={styles.button}
+          onPress={async () => {
             this.props.navigation.navigate('signup');
           }}>
-          <Text style={{color:'#012F6F',}}>Sign Up</Text>
+         <Text style={styles.btntext}>Sign Up</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.button}
@@ -94,7 +94,7 @@ export default class loginform extends React.Component {
             // );
             this.props.navigation.navigate('forgetpasswords');
           }}>
-          <Text style={styles.btntext}>Forgetpassword</Text>
+          <Text style={styles.btntext}>Forget Password</Text>
         </TouchableOpacity>
       </View>
       </View>

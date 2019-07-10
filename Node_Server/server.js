@@ -138,7 +138,7 @@ app.get("/ownprojects", function(req, res){
     let objKey = Object.keys(snapshot.val());
     let projects = [];
     for(var i =0 ;i < objKey.length; i++ ){
-      if(snapshot.val()[objKey[i]].email==req.query.email &&snapshot.val()[objKey[i]].status=="YES"){
+      if(snapshot.val()[objKey[i]].email==req.query.email){
         // console.log(snapshot.val()[objKey[i]]);
         projects.push({refID:objKey[i], ...snapshot.val()[objKey[i]]});
       }
@@ -157,7 +157,7 @@ app.get("/adminprojects", function(req, res){
     let objKey = Object.keys(snapshot.val());
     let projects = [];
     for(var i =0 ;i < objKey.length; i++ ){
-      if(snapshot.val()[objKey[i]].status=="NO"){
+      if(snapshot.val()[objKey[i]].status=="NO"&&snapshot.val()[objKey[i]].projectstatus!="Denied"){
         // console.log(snapshot.val()[objKey[i]]);
         projects.push({refID:objKey[i], ...snapshot.val()[objKey[i]]});
       }
@@ -198,7 +198,8 @@ app.get("/updateprojects", function(req, res){
     for(var i =0 ;i < objKey.length; i++ ){
       if(objKey[i]==req.query.id){
         firebase.database().ref('/Projects/'+req.query.id).update({
-          status : "YES"
+          status : "YES",
+          projectstatus : "Accepted"
         });
       }
     };
@@ -206,6 +207,28 @@ app.get("/updateprojects", function(req, res){
   });
   
 })
+
+app.get("/updatedenyprojects", function(req, res){
+  // if(req.query.email != null){
+    // console.log('req.query.email');
+  // } 
+
+  var projectsRef = firebase.database().ref('/Projects').orderByChild('timestamp');
+  projectsRef.once('value', (snapshot) => {
+    let objKey = Object.keys(snapshot.val());
+    for(var i =0 ;i < objKey.length; i++ ){
+      if(objKey[i]==req.query.id){
+        firebase.database().ref('/Projects/'+req.query.id).update({
+          status : "NO",
+          projectstatus : "Denied"
+        });
+      }
+    };
+      res.end();
+  });
+  
+})
+
 app.get("/verifybalance", function(req, res){
   // if(req.query.email != null){
     // console.log('req.query.email');

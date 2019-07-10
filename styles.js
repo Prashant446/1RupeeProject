@@ -23,8 +23,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         padding: 10,
         backgroundColor: '#00b9f1',
-        marginTop: 30,
-        marginBottom:20,
+        marginTop: 8,
+        marginBottom:8,
         borderRadius: 5,
     },
     btntext: {

@@ -226,7 +226,23 @@ export default class Decker extends React.Component {
         }}>
           <View style={{}}>
             <Text
-              style={{fontSize:15, color:'#efefef'}}>Verify</Text>
+              style={{fontSize:15, color:'#efefef'}}>Approve</Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.submitButton}
+        onPress={() => {
+          // console.log(this.state.dataSource[this.state.currentIndex].refID);
+          fetch('http://172.17.73.189:8080/updatedenyprojects?id='+this.state.dataSource[this.state.currentIndex].refID)
+          .then(
+            alert("Updated Succesfully. Please refresh to see changes.")
+            )
+          .catch((error) =>{
+            console.error(error);
+          }); 
+        }}>
+          <View style={{}}>
+            <Text
+              style={{fontSize:15, color:'#efefef'}}>Deny</Text>
           </View>
         </TouchableOpacity>
       </View>

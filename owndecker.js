@@ -197,6 +197,7 @@ userMail = AsyncStorage.getItem('userMail', (err, result) => {
               {/* <Text style={styles.genText}>Account NO.- {item.accountNo}</Text>
               <Text style={styles.genText}>IFSC Code- {item.ifscCode}</Text>
               <Text style={styles.genText}>Education Qualification- {item.education}</Text> */}
+              <Text style={styles.genText}>Project Status- {item.projectstatus}</Text>
               <Text style={styles.genText}>Total Amount- {item.projectbalance}</Text>
               <Text style={styles.genText}>Total Withdrawn Amount- {item.projectwithdrawn}</Text>
               <Text style={styles.genText}>Current Amount- {item.currentbalance}</Text>

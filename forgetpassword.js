@@ -15,7 +15,7 @@ import {
   StackActions,
   NavigationActions,
 } from 'react-navigation';
-
+import {styles} from './styles';
 import adminpage from './Admin'
 import viewmoneyrequestpage from './Viewmoney'
 import viewprojectrequestpage from './Viewproject'
@@ -45,11 +45,17 @@ async checkUser(data) {
     }
   }
 
+
+
+
+
+
   render() {
     return (
     
       <View style={styles.container}>
-        <Text style={styles.header}>Get Password</Text>
+      <View style={styles.innerContainer}>
+        <Text style={styles.header}>Password Reset</Text>
         <TextInput
           style={styles.textinput}
           placeholder="Your email"
@@ -58,7 +64,8 @@ async checkUser(data) {
         />
         <TextInput
           style={styles.textinput}
-          placeholder="New Password"
+          placeholder="Your Password"
+          secureTextEntry={true}
           underlineColorAndroid={'transparent'}
           onChangeText={password => this.setState({ password })}
         />
@@ -80,48 +87,9 @@ async checkUser(data) {
           <Text style={styles.btntext}>Confirm</Text>
         </TouchableOpacity>
       </View>
-      // </View>
+      </View>
     );
   }
 }
 
 
-
-
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#36485f',
-    paddingLeft: 60,
-    paddingRight: 60,
-  },
-  button: {
-    alignSelf: 'stretch',
-    alignItems: 'center',
-    padding: 20,
-    backgroundColor: '#59cbbd',
-    marginTop: 30,
-  },
-  btntext: {
-    color: '#fff',
-    fontWeight: 'bold',
-  },
-  header: {
-    fontSize: 24,
-    color: '#fff',
-    paddingBottom: 10,
-    marginBottom: 40,
-    borderBottomColor: '#199187',
-    borderBottomWidth: 1,
-  },
-  textinput: {
-    alignSelf: 'stretch',
-    height: 40,
-    marginBottom: 30,
-    borderBottomColor: '#f8f8f8',
-    borderBottomWidth: 1,
-  },
-});
