@@ -1,16 +1,7 @@
 import React, { Component } from 'react';
 import {Platform, StyleSheet,Text,TextInput,AsyncStorage,View,TouchableOpacity,Button,} from 'react-native';
-import {
-  createAppContainer,
-  createStackNavigator,
-  StackActions,
-  NavigationActions,
-} from 'react-navigation';
-import donation from './Donation'
-import decker from './decker'
-import owndecker from './owndecker'
+
 import {styles} from './styles';
-// import console = require('console');
 
 export default class options extends React.Component {
   constructor(props) {

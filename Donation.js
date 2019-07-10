@@ -8,22 +8,8 @@ import {
   View,
   TouchableOpacity,
 } from 'react-native';
-import {
-  createAppContainer,
-  createStackNavigator,
-  StackActions,
-  NavigationActions,
-} from 'react-navigation';
-import {bank,project} from './newprojectfordonation'
-import paytm from './paytm.js'
-import decker from './decker'
 import {styles} from './styles';
-// import {
-//   Header,
-// } from 'react-component';
-// import 
-//   HHeader
-//  rom './HHeader.js'
+
 export default class donations extends React.Component {
   render() {
     return (
@@ -36,7 +22,7 @@ export default class donations extends React.Component {
            this.props.navigation.navigate('deck');
                 }}
         >
-          <Text style={styles.btntext}>Your Project</Text>
+          <Text style={styles.btntext}>Your Projects</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.button}

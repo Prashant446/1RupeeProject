@@ -9,18 +9,7 @@ import {
   AsyncStorage,
   TouchableOpacity,
 } from 'react-native';
-import {
-  createAppContainer,
-  createStackNavigator,
-  StackActions,
-  NavigationActions,
-} from 'react-navigation';
 
-import adminpage from './Admin'
-import viewmoneyrequestpage from './Viewmoney'
-import viewprojectrequestpage from './Viewproject'
-import signupform from './App'
-import options from './opti'
 import {styles} from './styles';
 export default class loginform extends React.Component {
   constructor(props) {

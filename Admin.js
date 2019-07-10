@@ -8,24 +8,7 @@ import {
   View,
   TouchableOpacity,
 } from 'react-native';
-import {
-  createAppContainer,
-  createStackNavigator,
-  StackActions,
-  NavigationActions,
-} from 'react-navigation';
-import signupform from './App'
-import viewmoneyrequestpage from './Viewmoney'
-import viewprojectrequestpage from './Viewproject'
-import loginform from './Loginforms'
-import options from './opti'
 
-// import {
-//   Header,
-// } from 'react-component';
-// import 
-//   HHeader
-//  rom './HHeader.js'
 export default class adminpage extends React.Component {
   render() {
     return (

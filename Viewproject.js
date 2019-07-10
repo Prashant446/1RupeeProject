@@ -8,19 +8,7 @@ import {
   View,
   TouchableOpacity,
 } from 'react-native';
-import {
-  createAppContainer,
-  createStackNavigator,
-  StackActions,
-  NavigationActions,
-} from 'react-navigation';
-import options from './opti'
-// import {
-//   Header,
-// } from 'react-component';
-// import 
-//   HHeader
-//  rom './HHeader.js'
+
 export default class viewprojectrequestpage extends React.Component {
   constructor(props) {
     super(props);

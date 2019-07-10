@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
 import {Modal,WebView,Platform, StyleSheet,Text,TextInput,View,TouchableOpacity,Button,} from 'react-native';
-import {
-  createAppContainer,
-  createStackNavigator,
-  StackActions,
-  NavigationActions,
-} from 'react-navigation';
-import donation from './Donation'
+
 import {styles} from './styles';
+
 export default class paytm extends React.Component {
 state = {
 showModal: false,
@@ -15,8 +10,6 @@ ack: "",
 ORDER_ID:"ASAFADFERGASKHDBFHJSNDByuhdakjJ",
 TXN_AMOUNT:"500",
 CUST_ID:"Aditya123",
-
-
 }
 
   render() {

@@ -4,12 +4,6 @@ import Constants from 'expo-constants';
 import * as ImagePicker from 'expo-image-picker'
 import * as Permissions from 'expo-permissions';
 import {styles} from './styles';
-// import {
-//   createAppContainer,
-//   createStackNavigator,
-//   StackActions,
-//   NavigationActions,
-// } from 'react-navigation';
 
 type props={};
 let global = {
