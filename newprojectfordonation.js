@@ -5,7 +5,6 @@ import * as ImagePicker from 'expo-image-picker'
 import * as Permissions from 'expo-permissions';
 import {styles} from './styles';
 
-type props={};
 let global = {
   name:'',
   longdescription: '', 
@@ -22,7 +21,8 @@ export class project extends React.Component {
   render() {
   
     return (
-      <View style={[styles.container, {backgroundColor:'white'}]}>
+      <View style={styles.container}>
+      <View style={styles.innerContainer}>
         <Text style={styles.header}>Registration for Organisations</Text>
         <TextInput
           style={styles.textinput}
@@ -66,6 +66,7 @@ export class project extends React.Component {
           }}>
           <Text style={styles.btntext}> Proceed </Text>
         </TouchableOpacity>
+      </View>
       </View>
     );
   }

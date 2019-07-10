@@ -18,12 +18,7 @@ import {
   NavigationActions,
 } from 'react-navigation';
 import {styles} from './styles';
-// import {
-//   Header,
-// } from 'react-component';
-// import 
-//   HHeader
-//  rom './HHeader.js'
+
 import adminpage from './Admin'
 import viewmoneyrequestpage from './Viewmoney'
 import viewprojectrequestpage from './Viewproject'
@@ -34,8 +29,6 @@ import {bank,project} from './newprojectfordonation'
 import paytm from './paytm.js'
 import decker from './decker'
 import owndecker from './owndecker'
-type Props = {};
-
 
 export  class signupform extends React.Component {
   constructor(props) {

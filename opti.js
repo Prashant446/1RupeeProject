@@ -41,7 +41,7 @@ export default class options extends React.Component {
            this.props.navigation.navigate('owndeck');
                 }}
         >
-          <Text style={styles.btntext}>Your Project</Text>
+          <Text style={styles.btntext}>Your Projects</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.button}
@@ -49,7 +49,7 @@ export default class options extends React.Component {
             this.props.navigation.navigate('proj');
           }}
         >
-          <Text style={styles.btntext}>Requests for Donation</Text>
+          <Text style={styles.btntext}>Request for Donations</Text>
         </TouchableOpacity>
       </View>
       </View>
