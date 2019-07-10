@@ -25,7 +25,6 @@ import viewmoneyrequestpage from './Viewmoney'
 import viewprojectrequestpage from './Viewproject'
 import loginform from './Loginforms'
 import options from './opti'
-import donation from './Donation'
 import {bank,project} from './newprojectfordonation'
 import {Decker,paytm} from './decker'
 import owndecker from './owndecker'
@@ -124,9 +123,6 @@ const AppNavigator = createStackNavigator(
     },
     option: {
       screen: options,
-    },
-    donate: {
-      screen: donation,
     },
     proj: {
       screen : project,

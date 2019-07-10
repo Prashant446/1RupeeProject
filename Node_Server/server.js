@@ -40,6 +40,20 @@ function conversion(date){
   };
   return date;
 };
+
+function paytmconversion(date){
+  for(var i = 0; i < date.length; i++){
+    if(date[i] == '@'){
+      date = date.substr(i + 1);
+      break;
+    }
+  };
+  return date;
+};
+
+
+
+
 function makeid(length) {
   var result           = '';
   var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -58,7 +72,8 @@ app.get("/verifymail",function(req,res){
   data={
     email : req.query.id3,
     password : req.query.id1,
-    phoneno : req.query.id4 
+    phoneno : req.query.id4 ,
+    contibution : 0
   }
 
   let paas = (encrypt(data.password, "donate")).toString() ; 
@@ -120,7 +135,7 @@ app.get("/projects", function(req, res){
     for(var i =0 ;i < objKey.length; i++ ){
       if(snapshot.val()[objKey[i]].status=="YES"){
         // console.log(snapshot.val()[objKey[i]]);
-        projects.push(snapshot.val()[objKey[i]]);
+        projects.push({refID:objKey[i], ...snapshot.val()[objKey[i]]});
       }
     };
     
@@ -207,6 +222,25 @@ app.get("/updateprojects", function(req, res){
   });
   
 })
+
+app.post("/paytmresult", function(req, res){
+  let refId = paytmconversion(req.body.body.ORDERID);
+
+  let ttotal =  parseInt(req.body.body.TXNAMOUNT);
+  let projectsRef = firebase.database().ref('/Projects').orderByChild('timestamp')
+  let total = 0;
+  projectsRef.once('value', (snapshot) => {
+  total = ttotal+snapshot.val()[refId].projectbalance;
+      // console.log(snapshot.val()[refId].projectbalance);
+  }).then(()=>{
+    firebase.database().ref('/Projects/'+refId).update({
+      projectbalance : total,
+    });
+    res.end();
+  });
+  })
+  
+  
 
 app.get("/updatedenyprojects", function(req, res){
   // if(req.query.email != null){
@@ -479,3 +513,4 @@ app.post('/users',function(req,res){
     }
   // })
 });
+

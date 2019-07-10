@@ -6,30 +6,22 @@ const SCREEN_HEIGHT = Dimensions.get('window').height
 const SCREEN_WIDTH = Dimensions.get('window').width
 import Icon from 'react-native-vector-icons/Ionicons'
 import { AuthSession } from 'expo';
-// const Users = [
-//   { id: "1", uri: require('./assets/1.jpg') },
-//   { id: "2", uri: require('./assets/2.jpg') },
-//   { id: "3", uri: require('./assets/3.jpg') },
-//   { id: "4", uri: require('./assets/4.jpg') },
-//   { id: "5", uri: require('./assets/5.jpg') },
-// ]
+
 let global={
   money : 0,
   email : '',
   date : '',
+  transactionId: ''
 };
  
 function conversion(date){
   for(var i = 0; i < date.length; i++){
-    if(date[i] == '/'){
+    if(date[i] == '/'||date[i] == ' '||date[i] == ':'){
       date = date.substr(0 , i) + '-' + date.substr(i + 1);
     }
   };
   return date;
 };
-global.date = new Date(Date.now()).toLocaleString();
-global.date = conversion(global.date); 
-
 export class Decker extends React.Component {
 
   constructor() {
@@ -241,6 +233,9 @@ export class Decker extends React.Component {
           onChangeText={(text) => this.setState({amount:text})}/>
         <TouchableOpacity style={styles.submitButton} 
           onPress={() => {
+            global.date = new Date(Date.now()).toLocaleString();
+            global.date = conversion(global.date); 
+            global.transactionId=this.state.dataSource[this.state.currentIndex].refID;
             global.money = this.state.amount;
             this.props.navigation.navigate('pay');
           }}
@@ -324,7 +319,7 @@ export class paytm extends React.Component {
   state = {
     showModal: false,
     ack: "",
-    ORDER_ID: global.date + global.email,
+    ORDER_ID: global.date + '@' +global.transactionId ,
     TXN_AMOUNT: global.money,
     CUST_ID: global.email,
   }
@@ -353,7 +348,7 @@ export class paytm extends React.Component {
       })} 
     >
         <WebView
-          source={{uri:'http://172.17.74.169:3009/api/paytm/request'}}
+          source={{uri:'http://172.17.78.251:3009/api/paytm/request'}}
           injectedJavaScript={`document.getElementById('ORDER_ID').value = "${ORDER_ID}";
           document.getElementById('TXN_AMOUNT').value = "${TXN_AMOUNT}";
           document.getElementById('CUST_ID').value = "${CUST_ID}";
@@ -365,32 +360,54 @@ export class paytm extends React.Component {
       );
     }
   }
-  const styless = StyleSheet.create({
+// import React from 'react';
+// import { StyleSheet, Dimensions } from 'react-native';
+// const SCREEN_HEIGHT = Dimensions.get('window').height
+// const SCREEN_WIDTH = Dimensions.get('window').width
+const styless = StyleSheet.create({
     container: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: '#36485f',
-      paddingLeft: 60,
-      paddingRight: 60,
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'stretch',
+        backgroundColor: '#ededed',
+        paddingLeft: 20,
+        paddingRight: 20,
     },
-    header: {
-      fontSize: 24,
-      color: '#fff',
-      paddingBottom: 10,
-      marginBottom: 40,
-      borderBottomColor: '#199187',
-      borderBottomWidth: 1,
+    innerContainer: {
+        elevation:1,
+        backgroundColor:'white',
+        alignItems:'center',
+        padding:15,
+        borderRadius:10
     },
     button: {
-      alignSelf: 'stretch',
-      alignItems: 'center',
-      padding: 20,
-      backgroundColor: '#59cbbd',
-      marginTop: 30,
+        alignSelf: 'stretch',
+        alignItems: 'center',
+        padding: 10,
+        backgroundColor: '#00b9f1',
+        marginTop: 8,
+        marginBottom:8,
+        borderRadius: 5,
     },
     btntext: {
-      color: '#fff',
-      fontWeight: 'bold',
+        color: '#fff',
+        fontWeight: 'bold',
+        fontSize:20,
     },
-  });
+    header: {
+        alignSelf:'center',
+        fontSize: 32,
+        // color: '#fff',
+        paddingBottom: 10,
+        marginBottom: 40,
+        borderBottomColor: '#012F6F',
+        borderBottomWidth: 1,
+    },
+    textinput: {
+        alignSelf: 'stretch',
+        height: 40,
+        marginBottom: 30,
+        borderBottomColor: '#012F6F',
+        borderBottomWidth: 1,
+    },
+});
