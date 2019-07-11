@@ -172,7 +172,7 @@ app.get("/adminprojects", function(req, res){
     let objKey = Object.keys(snapshot.val());
     let projects = [];
     for(var i =0 ;i < objKey.length; i++ ){
-      if(snapshot.val()[objKey[i]].status=="NO"&&snapshot.val()[objKey[i]].projectstatus!="Denied"){
+      if(snapshot.val()[objKey[i]].status=="NO"&&snapshot.val()[objKey[i]].projectstatus=="Pending"){
         // console.log(snapshot.val()[objKey[i]]);
         projects.push({refID:objKey[i], ...snapshot.val()[objKey[i]]});
       }

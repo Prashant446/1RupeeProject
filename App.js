@@ -152,6 +152,7 @@ const AppNavigator = createStackNavigator(
         // height:10,
       },
       headerTintColor: '#fff',
+      title:"Bridging Funds",
       headerTitleStyle: {
         fontWeight: 'bold',
       },

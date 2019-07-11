@@ -79,7 +79,7 @@ export default class Decker extends React.Component {
   }
 
   componentWillMount() { 
-    fetch('http://ec2-3-14-86-69.us-east-2.compute.amazonaws.com/adminprojectsformoney')
+    fetch('http://ec2-3-14-86-69.us-east-2.compute.amazonaws.com/adminprojects')
       .then((response) => response.json())
       .then((responseJson) => {
         // console.log(JSON.stringify(responseJson));

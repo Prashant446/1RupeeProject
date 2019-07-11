@@ -49,12 +49,7 @@ export class project extends React.Component {
             onChangeText={longdescription => this.setState({ longdescription })}
           />
         </View>
-        <TouchableOpacity
-          style={styles.button}
-          onPress= {this._pickImage}
-        >
-        <Text style={styles.btntext}> Add Image </Text>
-        </TouchableOpacity>
+    
         <TouchableOpacity
           style={styles.button}
           onPress={() => {

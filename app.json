@@ -24,7 +24,10 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "bundleIdentifier": "com.bridgingFunds.bridgingFunds"
+    },
+    "android": {
+      "package": "com.bridgingFunds.bridgingFunds"
     }
   }
 }
