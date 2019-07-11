@@ -220,7 +220,7 @@ export default class Decker extends React.Component {
         }}>
           <View style={{}}>
             <Text
-              style={{fontSize:15, color:'#efefef'}}>Accept</Text>
+              style={{fontSize:15, color:'#000000'}}>Accept</Text>
           </View>
         </TouchableOpacity>
         
@@ -237,7 +237,7 @@ export default class Decker extends React.Component {
         }}>
           <View style={{}}>
             <Text
-              style={{fontSize:15, color:'#efefef'}}>Deny</Text>
+              style={{fontSize:15, color:'#000000'}}>Deny</Text>
           </View>
         </TouchableOpacity>
       </View>

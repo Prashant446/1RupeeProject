@@ -243,7 +243,7 @@ export class Decker extends React.Component {
         >
           <View style={{}}>
             <Text
-              style={{fontSize:15, color:'#efefef'}}>Contribute</Text>
+              style={{fontSize:15, color:'#000000'}}>Donate</Text>
           </View>
         </TouchableOpacity>
       </View>

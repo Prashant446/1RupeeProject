@@ -30,6 +30,8 @@ const styles = StyleSheet.create({
       height: null,
       borderTopLeftRadius: 10,
       borderTopRightRadius: 10,
+      borderBottomWidth : 2,
+      borderBottomColor : '#002E6E',
       elevation:1,
       backgroundColor:'white',
       paddingLeft: 15,
@@ -54,6 +56,9 @@ const styles = StyleSheet.create({
     genText: {
       textAlign: 'justify',
       fontSize: 15,
+      borderBottomWidth : 1,
+      paddingBottom : 3,
+      borderBottomColor: '#ededed',
     },
     textInput: {
       borderWidth:1,
@@ -66,7 +71,7 @@ const styles = StyleSheet.create({
       textAlign: 'center'
     },
     submitButton: {
-      backgroundColor:'#002E6E',
+      backgroundColor:'#fff',
       height:40,
       width:SCREEN_WIDTH/5,
       borderRadius: 5,

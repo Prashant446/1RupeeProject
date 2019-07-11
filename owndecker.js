@@ -213,6 +213,7 @@ userMail = AsyncStorage.getItem('userMail', (err, result) => {
 
     return(
       <View style={[styles.cardFooter,{flexDirection:'column'}]}>
+          <View style={styles.cardFooter}>
           <TextInput
           adjustsFontSizeToFit={true}
           numberOfLines={1}
@@ -221,6 +222,7 @@ userMail = AsyncStorage.getItem('userMail', (err, result) => {
           style={styles.textInput}
           onChangeText={(text) => this.setState({msg:text})}
           />
+          </View>
       <View style={styles.cardFooter}>          
           <TextInput
           adjustsFontSizeToFit={true}
@@ -246,7 +248,7 @@ userMail = AsyncStorage.getItem('userMail', (err, result) => {
 
           <View style={{}}>
             <Text
-              style={{fontSize:15, color:'#efefef'}}>Request</Text>
+              style={{fontSize:15, color:'#000000'}}>Request</Text>
           </View>
         </TouchableOpacity>
         
