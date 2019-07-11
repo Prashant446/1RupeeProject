@@ -1,6 +1,7 @@
 import React from 'react';
 import { Platform, KeyboardAvoidingView, Text, AsyncStorage , TextInput, View, Dimensions, Image, Animated, PanResponder, ActivityIndicator, ScrollView, TouchableWithoutFeedback , TouchableOpacity} from 'react-native';
 import {styles} from './assets/styles/styles'
+import { Header } from 'react-navigation';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height
 const SCREEN_WIDTH = Dimensions.get('window').width
@@ -78,31 +79,21 @@ export default class Decker extends React.Component {
   }
 
   componentWillMount() { 
-    userMail = AsyncStorage.getItem('userMail', (err, result) => {
-     
-        let maill = JSON.parse(result);
-        maill = maill.mail;
-        // console.log(maill);
-        this.email = maill ;
-      }).then(()=>{
-        //   console.log(this.email);
-        //   let url = 'http://172.17.73.189:8080/ownprojects?email='+this.email;
-          fetch('http://172.17.73.189:8080/adminprojectsformoney')
-        .then((response) => response.json())
-        .then((responseJson) => {
-          // console.log(JSON.stringify(responseJson));
-          var arr = Object.keys(responseJson).map((k) => { return {id:k ,...responseJson[k]} });
-          // var arr1 = Object.keys(responseJson);
-          // console.log(arr);
-          this.setState({
-            isLoading: false,
-            dataSource: arr,
-          })
-          this.lastIndex = arr.length - 1;
-         })
-        .catch((error) =>{
-          console.error(error);
-        }); 
+      fetch('http://ec2-3-14-86-69.us-east-2.compute.amazonaws.com/adminprojectsformoney')
+      .then((response) => response.json())
+      .then((responseJson) => {
+        // console.log(JSON.stringify(responseJson));
+        var arr = Object.keys(responseJson).map((k) => { return {id:k ,...responseJson[k]} });
+        // var arr1 = Object.keys(responseJson);
+        // console.log(arr);
+        this.setState({
+          isLoading: false,
+          dataSource: arr,
+        })
+        this.lastIndex = arr.length - 1;
+        })
+      .catch((error) =>{
+        console.error(error);
       });
       
     this.PanResponder = PanResponder.create({
@@ -219,7 +210,7 @@ export default class Decker extends React.Component {
         <TouchableOpacity style={styles.submitButton}
         onPress={() => {
           // console.log(this.state.dataSource[this.state.currentIndex].refID);
-          fetch('http://172.17.73.189:8080/verifybalance?id='+this.state.dataSource[this.state.currentIndex].refID)
+          fetch('http://ec2-3-14-86-69.us-east-2.compute.amazonaws.com/verifybalance?id='+this.state.dataSource[this.state.currentIndex].refID)
           .then(
             alert("Updated Succesfully. Please refresh to see changes.")
             )
@@ -236,7 +227,7 @@ export default class Decker extends React.Component {
         <TouchableOpacity style={styles.submitButton}
         onPress={() => {
           // console.log(this.state.dataSource[this.state.currentIndex].refID);
-          fetch('http://172.17.73.189:8080/ignorebalance?id='+this.state.dataSource[this.state.currentIndex].refID)
+          fetch('http://ec2-3-14-86-69.us-east-2.compute.amazonaws.com/ignorebalance?id='+this.state.dataSource[this.state.currentIndex].refID)
           .then(
             alert("Updated Succesfully. Please refresh to see changes.")
             )
@@ -305,10 +296,8 @@ export default class Decker extends React.Component {
 
   render() {
     return (  
-      <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : null} style={{ flex: 1 }}>
+      <KeyboardAvoidingView behavior='height' style={{ flex: 1 }} keyboardVerticalOffset = {Header.HEIGHT + 30}>
         <View style={{flex: 1, justifyContent: "flex-end",}}>      
-          <View style={{ backgroundColor:'#002E6E', height:50 }}>
-          </View>
           <View style={{ backgroundColor: '#ededed',flex:1}}>
               {this.renderUsers()}
           </View>

@@ -1,9 +1,9 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 22283,
+  "expoServerPort": null,
+  "packagerPort": null,
+  "packagerPid": null,
   "expoServerNgrokUrl": "https://pp-nk8.anonymous.1rupeeproject.exp.direct",
   "packagerNgrokUrl": "https://packager.pp-nk8.anonymous.1rupeeproject.exp.direct",
-  "ngrokPid": 22438
+  "ngrokPid": 10070
 }

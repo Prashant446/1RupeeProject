@@ -1,6 +1,7 @@
 import React from 'react';
 import { Platform, KeyboardAvoidingView, Text,Modal,WebView,AsyncStorage, TextInput, View, Dimensions,StyleSheet, Image, Animated, PanResponder, ActivityIndicator, ScrollView, TouchableWithoutFeedback , TouchableOpacity} from 'react-native';
 import {styles} from './assets/styles/styles'
+import { Header } from 'react-navigation';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height
 const SCREEN_WIDTH = Dimensions.get('window').width
@@ -99,7 +100,7 @@ export class Decker extends React.Component {
       // console.log(maill);
       global.email = maill ;
     })
-    fetch('http://172.17.73.189:8080/projects')
+    fetch('http://ec2-3-14-86-69.us-east-2.compute.amazonaws.com/projects')
       .then((response) => response.json())
       .then((responseJson) => {
         // console.log(JSON.stringify(responseJson));
@@ -302,15 +303,14 @@ export class Decker extends React.Component {
   render() {
 
     return (
-      <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : null} style={{ flex: 1 }}>
-        <View style={{flex: 1, justifyContent: "flex-end",}}>      
-          <View style={{ backgroundColor:'#002E6E', height:50 }}>
-          </View>
-          <View style={{ backgroundColor: '#ededed',flex:1}}>
+      <KeyboardAvoidingView behavior='height' style={{ flex: 1 }} keyboardVerticalOffset = {Header.HEIGHT + 30}>
+        <View style={{flex:1,justifyContent: "flex-end"}}>      
+          <View style={{ backgroundColor: '#ededed', flex:1}}>
               {this.renderUsers()}
           </View>
-          {this._renderFooter()}
+          {this._renderFooter()}  
         </View>
+        
       </KeyboardAvoidingView>
     );
   }
@@ -329,6 +329,7 @@ export class paytm extends React.Component {
     let {showModal,ack,ORDER_ID,TXN_AMOUNT,CUST_ID}= this.state;
       return (
         <View style={styless.container}>
+          <View style={styless.innerContainer}>
           <Text style={styless.header}>Paytm</Text>
   
           <TouchableOpacity
@@ -341,6 +342,7 @@ export class paytm extends React.Component {
             }}>
             <Text style={styless.btntext}>Pay with Paytm</Text>
           </TouchableOpacity>
+          </View>
         <Modal
       visible = {showModal}
       onRequestClose =  {() => this.setState({
@@ -348,7 +350,7 @@ export class paytm extends React.Component {
       })} 
     >
         <WebView
-          source={{uri:'http://172.17.78.251:3009/api/paytm/request'}}
+          source={{uri:'http://ec2-3-14-86-69.us-east-2.compute.amazonaws.com/api/paytm/request'}}
           injectedJavaScript={`document.getElementById('ORDER_ID').value = "${ORDER_ID}";
           document.getElementById('TXN_AMOUNT').value = "${TXN_AMOUNT}";
           document.getElementById('CUST_ID').value = "${CUST_ID}";
@@ -360,10 +362,6 @@ export class paytm extends React.Component {
       );
     }
   }
-// import React from 'react';
-// import { StyleSheet, Dimensions } from 'react-native';
-// const SCREEN_HEIGHT = Dimensions.get('window').height
-// const SCREEN_WIDTH = Dimensions.get('window').width
 const styless = StyleSheet.create({
     container: {
         flex: 1,
@@ -391,7 +389,6 @@ const styless = StyleSheet.create({
     },
     btntext: {
         color: '#fff',
-        fontWeight: 'bold',
         fontSize:20,
     },
     header: {

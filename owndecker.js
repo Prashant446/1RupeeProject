@@ -1,6 +1,7 @@
 import React from 'react';
-import { Platform, KeyboardAvoidingView, Text, AsyncStorage , TextInput, View, Dimensions, Image, Animated, PanResponder, ActivityIndicator, ScrollView, TouchableWithoutFeedback , TouchableOpacity} from 'react-native';
+import { Platform, SafeAreaView,KeyboardAvoidingView, Text, AsyncStorage , TextInput, View, Dimensions, Animated, PanResponder, ActivityIndicator, ScrollView, TouchableWithoutFeedback , TouchableOpacity} from 'react-native';
 import {styles} from './assets/styles/styles'
+import { Header } from 'react-navigation';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height
 const SCREEN_WIDTH = Dimensions.get('window').width
@@ -82,12 +83,9 @@ userMail = AsyncStorage.getItem('userMail', (err, result) => {
      
   let maill = JSON.parse(result);
   maill = maill.mail;
-  // console.log(maill);
   this.email = maill ;
 }).then(()=>{
-    // console.log(this.email);
-  //   let url = 'http://172.17.73.189:8080/ownprojects?email='+this.email;
-    fetch('http://172.17.73.189:8080/ownprojects?email='+this.email)
+    fetch('http://ec2-3-14-86-69.us-east-2.compute.amazonaws.com/ownprojects?email='+this.email)
   .then((response) => response.json())
   .then((responseJson) => {
     // console.log(JSON.stringify(responseJson));
@@ -236,7 +234,7 @@ userMail = AsyncStorage.getItem('userMail', (err, result) => {
         <TouchableOpacity style={styles.submitButton}
          onPress={() => {
           console.log(this.state.dataSource[this.state.currentIndex].refID);
-          fetch('http://172.17.73.189:8080/requestMoney?id='+this.state.dataSource[this.state.currentIndex].refID+"&id2="+this.state.amount+"&id3="+this.state.msg)
+          fetch('http://ec2-3-14-86-69.us-east-2.compute.amazonaws.com/requestMoney?id='+this.state.dataSource[this.state.currentIndex].refID+"&id2="+this.state.amount+"&id3="+this.state.msg)
           .then(
             alert("Money Requested Successfully.")
             )
@@ -309,16 +307,20 @@ userMail = AsyncStorage.getItem('userMail', (err, result) => {
   }
 
   render() {
-    return (  
-      <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : null} style={{ flex: 1 }}>
-        <View style={{flex: 1, justifyContent: "flex-end",}}>      
-          <View style={{ backgroundColor:'#002E6E', height:50 }}>
-          </View>
+    return (
+      <KeyboardAvoidingView behavior='height' style={{ flex: 1 }} keyboardVerticalOffset = {Header.HEIGHT + 30}>
+        <SafeAreaView style={{ flex:1 }}>
+        <View style={{flex: 1, justifyContent: 'flex-end',flexDirection:'column'}}>
           <View style={{ backgroundColor: '#ededed',flex:1}}>
-              {this.renderUsers()}
+            {this.renderUsers()}
           </View>
-          {this._renderFooter()}
+            {this._renderFooter()}
         </View>
+        </SafeAreaView>
+        {/* <View style={{flex:1, justifyContent:'flex-end',flexDirection:'column', backgroundColor:'red'}}>
+        <TextInput style={styles.textInput}></TextInput>
+        <View style={{height:100, backgroundColor:'green'}}></View>
+        </View> */}
       </KeyboardAvoidingView>
     );
   }

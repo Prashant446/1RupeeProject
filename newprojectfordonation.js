@@ -111,7 +111,7 @@ export class bank extends React.Component {
 
   async newUser(data) {
     try {
-      let response = await fetch('http://172.17.73.189:8080/addProject', {
+      let response = await fetch('http://ec2-3-14-86-69.us-east-2.compute.amazonaws.com/addProject', {
         method: 'POST',
         headers: {
           Accept: 'application/json',
@@ -125,15 +125,16 @@ export class bank extends React.Component {
       console.log(error);
     }
   }
-
-  render() {
+  componentDidMount() {
     userMail = AsyncStorage.getItem('userMail', (err, result) => {
-     
       let maill = JSON.parse(result);
       maill = maill.mail;
       // console.log(maill);
       this.setState({ email  : maill});
     });
+  }
+  render() {
+    
     return (
       <View style={styles.container}>
       <View style={styles.innerContainer}>

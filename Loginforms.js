@@ -19,7 +19,7 @@ export default class loginform extends React.Component {
 
   async checkUser(data) {
     try {
-      let response = await fetch('http://172.17.73.189:8080/login', {
+      let response = await fetch('http://ec2-3-14-86-69.us-east-2.compute.amazonaws.com/login', {
         method: 'POST',
         headers: {
           Accept: 'application/json',
@@ -66,7 +66,7 @@ export default class loginform extends React.Component {
                   mail: this.state.email,
                 };
                 AsyncStorage.setItem('userMail', JSON.stringify(user), () => {
-                    this.props.navigation.navigate('option');
+                this.props.navigation.navigate('option');
                 });   
               } else if (isadmin.val == 'nouser') {
                 alert('Login failed');
@@ -88,10 +88,6 @@ export default class loginform extends React.Component {
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
-            // fetch('http://172.17.73.189:8080/forgetpassword')
-            // .then(
-            //   alert("Password has been sent to your registered email address.")
-            // );
             this.props.navigation.navigate('forgetpasswords');
           }}>
           <Text style={styles.btntext}>Forget Password</Text>

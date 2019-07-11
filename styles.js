@@ -29,7 +29,6 @@ const styles = StyleSheet.create({
     },
     btntext: {
         color: '#fff',
-        fontWeight: 'bold',
         fontSize:20,
     },
     header: {
